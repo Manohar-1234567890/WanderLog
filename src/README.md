@@ -5,7 +5,6 @@ Travel Bucket List Application built using React + Vite.
 ## Installation
 
 npm install
-
 npm run dev
 
 ## Test Credentials
