@@ -1,0 +1,121 @@
+.bucket-page {
+  padding: 40px 50px;
+  background: linear-gradient(to bottom, #0f0f1e, #1a1a2e);
+  min-height: calc(100vh - 80px);
+}
+
+.bucket-page h1 {
+  color: #00d4ff;
+  font-size: 36px;
+  margin: 0 0 30px 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin: 30px 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabs button {
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabs button:hover {
+  color: #00d4ff;
+}
+
+.tabs button.active {
+  color: #00d4ff;
+  border-bottom-color: #00d4ff;
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bucket-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bucket-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.bucket-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.bucket-card > div {
+  padding: 16px;
+}
+
+.bucket-card h3 {
+  color: #00d4ff;
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.bucket-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.bucket-card button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #ff006e, #ff0080);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bucket-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 0, 110, 0.3);
+}
