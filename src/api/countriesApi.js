@@ -1,9 +1,7 @@
-const BASE_URL = "https://restcountries.com/v3.1";
+const BASE_URL = "/api/countries";
 
 export const getAllCountries = async () => {
-  const response = await fetch(
-    `${BASE_URL}/all?fields=name,flags,population,capital,region,cca3`
-  );
+  const response = await fetch(BASE_URL);
 
   if (!response.ok) {
     throw new Error("Failed to fetch countries");
@@ -13,13 +11,11 @@ export const getAllCountries = async () => {
 };
 
 export const getCountryByCode = async (code) => {
-  const response = await fetch(`${BASE_URL}/alpha/${code}`);
+  const response = await fetch(`${BASE_URL}?code=${encodeURIComponent(code)}`);
 
   if (!response.ok) {
     throw new Error("Country not found");
   }
 
-  const data = await response.json();
-
-  return data[0];
+  return response.json();
 };
