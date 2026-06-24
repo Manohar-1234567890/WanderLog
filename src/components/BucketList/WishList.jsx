@@ -5,6 +5,28 @@ import { Link } from "react-router-dom";
 import { BucketListContext }
 from "../../context/BucketListContext";
 
+const getFlagUrl = (country) => {
+  try {
+    const code = country?.cca2?.toLowerCase();
+
+    if (country?.flags?.svg) {
+      return country.flags.svg;
+    }
+
+    if (country?.flags?.png) {
+      return country.flags.png;
+    }
+
+    if (code) {
+      return `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/${code}.svg`;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+};
+
 const WishList = () => {
   const {
     wishlist,
@@ -21,8 +43,8 @@ const WishList = () => {
           key={country.cca3}
         >
           <img
-            src={country.flags.png}
-            alt=""
+            src={getFlagUrl(country)}
+            alt={country.name?.common || "Country flag"}
           />
 
           <h3>

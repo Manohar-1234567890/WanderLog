@@ -19,20 +19,45 @@ const BucketListProvider = ({ children }) => {
   };
 
   const addToVisited = (country) => {
-  const exists = visited.some(
-    (item) => item.cca3 === country.cca3
-  );
+    const exists = visited.some(
+      (item) => item.cca3 === country.cca3
+    );
 
-  if (!exists) {
-    setVisited([...visited, country]);
-  }
+    if (!exists) {
+      setVisited([
+        ...visited,
+        {
+          ...country,
+          photo: country.photo || null,
+          photos: country.photos || [],
+        },
+      ]);
+    }
 
-  setWishlist(
-    wishlist.filter(
-      (item) => item.cca3 !== country.cca3
-    )
-  );
-};
+    setWishlist(
+      wishlist.filter(
+        (item) => item.cca3 !== country.cca3
+      )
+    );
+  };
+
+  const updateVisitedPhoto = (code, photo) => {
+    setVisited(
+      visited.map((item) =>
+        item.cca3 === code ? { ...item, photos: [...(item.photos || []), photo] } : item
+      )
+    );
+  };
+
+  const removeVisitedPhoto = (code, photoToRemove) => {
+    setVisited(
+      visited.map((item) =>
+        item.cca3 === code
+          ? { ...item, photos: (item.photos || []).filter((photo) => photo !== photoToRemove) }
+          : item
+      )
+    );
+  };
 
   const removeFromWishlist = (code) => {
     setWishlist(
@@ -53,6 +78,8 @@ const BucketListProvider = ({ children }) => {
         visited,
         addToWishlist,
         addToVisited,
+        updateVisitedPhoto,
+        removeVisitedPhoto,
         removeFromWishlist,
         removeFromVisited,
       }}

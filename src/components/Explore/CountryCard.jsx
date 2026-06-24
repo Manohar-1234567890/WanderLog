@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CountryCard = ({ country }) => {
+  const [imageError, setImageError] = useState(false);
+
   const getFlagUrl = () => {
     try {
       const code = country.cca2?.toLowerCase();
@@ -14,7 +17,7 @@ const CountryCard = ({ country }) => {
       }
 
       if (code) {
-        return `https://flagcdn.com/w320/${code}.png`;
+        return `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/${code}.svg`;
       }
 
       return null;
@@ -23,7 +26,7 @@ const CountryCard = ({ country }) => {
     }
   };
 
-  const flagUrl = getFlagUrl();
+  const flagUrl = imageError ? null : getFlagUrl();
 
   return (
     <Link
@@ -34,21 +37,12 @@ const CountryCard = ({ country }) => {
         <img
           src={flagUrl}
           alt={country.name.common}
-          onError={(e) => {
-            e.target.style.display = "none";
-          }}
-          style={{ width: "100%", height: "140px", objectFit: "cover" }}
+          onError={() => setImageError(true)}
+          loading="lazy"
+          style={{ width: "100%", height: "180px", objectFit: "cover", display: "block" }}
         />
       ) : (
-        <div style={{
-          width: "100%",
-          height: "140px",
-          background: "linear-gradient(135deg, #1a1a2e, #16213e)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "60px"
-        }}>
+        <div className="country-card-fallback">
           {country.flag || "🌍"}
         </div>
       )}
