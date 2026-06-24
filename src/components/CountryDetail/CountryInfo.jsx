@@ -1,11 +1,20 @@
 const CountryInfo = ({ country }) => {
   const getFlagUrl = () => {
     try {
-      if (country.flags && country.flags.svg) {
+      const code = country.cca2?.toLowerCase();
+
+      if (country.flags?.svg) {
         return country.flags.svg;
-      } else if (country.flags && country.flags.png) {
-        return `https://flagcdn.com/w600/${country.cca2?.toLowerCase()}.png`;
       }
+
+      if (country.flags?.png) {
+        return country.flags.png;
+      }
+
+      if (code) {
+        return `https://flagcdn.com/w600/${code}.png`;
+      }
+
       return null;
     } catch {
       return null;

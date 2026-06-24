@@ -3,12 +3,20 @@ import { Link } from "react-router-dom";
 const CountryCard = ({ country }) => {
   const getFlagUrl = () => {
     try {
-      if (country.flags && country.flags.svg) {
+      const code = country.cca2?.toLowerCase();
+
+      if (country.flags?.svg) {
         return country.flags.svg;
-      } else if (country.flags && country.flags.png) {
-        // Use a CORS-friendly flag service
-        return `https://flagcdn.com/w320/${country.cca2?.toLowerCase()}.png`;
       }
+
+      if (country.flags?.png) {
+        return country.flags.png;
+      }
+
+      if (code) {
+        return `https://flagcdn.com/w320/${code}.png`;
+      }
+
       return null;
     } catch {
       return null;
@@ -29,11 +37,12 @@ const CountryCard = ({ country }) => {
           onError={(e) => {
             e.target.style.display = "none";
           }}
+          style={{ width: "100%", height: "140px", objectFit: "cover" }}
         />
       ) : (
         <div style={{
           width: "100%",
-          height: "200px",
+          height: "140px",
           background: "linear-gradient(135deg, #1a1a2e, #16213e)",
           display: "flex",
           alignItems: "center",
@@ -52,11 +61,6 @@ const CountryCard = ({ country }) => {
         <p>
           <strong>Capital:</strong>{" "}
           {country.capital?.[0] || "N/A"}
-        </p>
-
-        <p>
-          <strong>Population:</strong>{" "}
-          {country.population.toLocaleString()}
         </p>
 
         <p>
